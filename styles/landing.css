@@ -2,6 +2,12 @@
      background-color: rgb(58,23,63); /* sets the background color to an RGB value (see below) */
  }
 
+.logo-animate{
+	-webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+  -moz-transition: width 2s, height 2s, -moz-transform 2s;
+	transition: width 2s, height 2s, transform 2s;
+}
+
 .hero-content {
 	position: relative;
 	min-height: 600px;
@@ -34,10 +40,24 @@
  }
  
  .point {
-     position: relative;
-     padding: 2rem;
-     text-align: center;
+	 position: relative;
+	 padding: 2rem;
+	 text-align: center;
+	 opacity: 0;
+	 -webkit-webkit-transform: scaleX(0.9) translateY(3rem);
+	 -moz-webkit-transform: scaleX(0.9) translateY(3rem);
+	 transform: scaleX(0.9) translateY(3rem);
+	 -webkit-webkit-transition: all 0.25s ease-in-out;
+	 -moz-webkit-transition: all 0.25s ease-in-out;
+	 transition: all 0.25s ease-in-out;
+	 -webkit-webkit-transition: .2s;
+	 -moz-webkit-transition: .2s;
+	 transition: .2s;
+	 -webkit-transition-delay: 0.2s;
+   -moz-transition-delay: 0.2s;
+   transition-delay: 0.2s;
  }
+
  
  .point .point-title {
      font-size: 1.25rem;
