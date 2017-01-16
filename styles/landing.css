@@ -2,6 +2,12 @@
      background-color: rgb(58,23,63); /* sets the background color to an RGB value (see below) */
  }
 
+.logo-animate{
+	-webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+  -moz-transition: width 2s, height 2s, -moz-transform 2s;
+	transition: width 2s, height 2s, transform 2s;
+}
+
 .hero-content {
 	position: relative;
 	min-height: 600px;
