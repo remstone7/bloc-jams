@@ -65,10 +65,10 @@ body.album{
      font-size: 14px;
      background-color: white;
      color: rgb(210, 40, 123);
-     border-radius: 50% 50%;
+     border-radius: 50%;
      display: inline-block;
-     width: 28px;
-     height: 28px;
+     width: 25px;
+     height: 25px;
  }
  
  .album-song-button:hover {
@@ -78,7 +78,8 @@ body.album{
  }
  
  .album-song-button span {
-     line-height: 28px;
+     line-height: 25px;
+	 bottom: 0;
  }
  
 
