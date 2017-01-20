@@ -34,7 +34,8 @@ var albumMarconi = {
 var createSongRow = function(songNumber, songName, songLength){
 	var template = 
 			'<tr class="album-view-song-item">'
-			+	'<td class="song-item-number">'+ songNumber +'</td>'
+			//	store song number data for event
+			+	'<td class="song-item-number" data-song-number="'+ songNumber +'">'+ songNumber +'</td>'
 			+	'<td class="song-item-title">'+ songName +'</td>'
 			+	'<td class="song-item-duration">'+ songLength +'</td>'
 				+ '</tr>'
@@ -67,6 +68,40 @@ var setCurrentAlbum = function(album){
 		albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
 	}
 };
+
+//elements we will be adding listeners to
+// store the first class in container
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+var songRows = document.getElementsByClassName('album-view-song-item');
+
+
+// create a play button
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
+
+// when window loads
+window.onload = function(){
+	// make album picasso
+	setCurrentAlbum(albumPicasso);
+	
+	songListContainer.addEventListener('mouseover', function(event){
+		// only target individual song rows during event delegation
+		// where the mouseover happens, only target that element with the parent element ==
+		if (event.target.parentElement.className == 'album-view-song-item'){
+			// change the content from the number to the play button's inner html
+			// query selector to pnly return a single element with class
+			event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+		}
+	});
+	
+	for (var i = 0; i < songRows.length; i++){
+		songRows[i].addEventListener('mouseleave', function(event){
+			//revert the content back to number
+			this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+		});
+	}
+	
+}
 
 	
 
