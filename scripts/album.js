@@ -30,6 +30,25 @@ var albumMarconi = {
      ]
  };
 
+// My example
+var albumCash = {
+	title: 'Ring of Fire',
+	artist: 'Johnny Cash',
+	label: 'Columbia Records',
+	year: '1963',
+	albumArtUrl: 'assets/images/album_covers/21.png',
+	songs: [
+			{ title: 'Ring of fire', duration: '2:37' },
+     	{ title: 'I\'d stil be there', duration: '2:37' },
+     	{ title: 'What do I care', duration: '2:10'},
+     	{ title: 'Can you hear me now?', duration: '3:14' },
+     	{ title: 'I still miss someone', duration: '2:36'}
+	]
+	
+};
+
+
+
 // create the album information
 var createSongRow = function(songNumber, songName, songLength){
 	var template = 
@@ -44,7 +63,7 @@ var createSongRow = function(songNumber, songName, songLength){
 }
 
 var setCurrentAlbum = function(album){
-	// select html elements 
+	// select actual album.html elements
 	var albumTitle = document.getElementsByClassName('album-view-title')[0];
 	var albumArtist = document.getElementsByClassName('album-view-artist')[0];
 	var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
@@ -64,44 +83,38 @@ var setCurrentAlbum = function(album){
 	
 	// go through all from album and insert into html
 	for(var i = 0; i < album.songs.length;i++){
+		// add and set equal to >  inserting information into the template from the object(albums)
 		albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
 	}
 };
 
-	
+var count = 1;
+ window.onload = function() {
+     setCurrentAlbum(albumPicasso);
+	 // elements is a live nodeList
+	 var elements = document.getElementsByClassName('album-cover-art');
 
 
+	 // loop through the nodelist
+	 for (var i = 0; i < elements.length; i++) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		// on click of the node list
+    elements[i].addEventListener('click', function(){
+		
+			// set a count and conditional through objects
+			count++;
+    if(count == 1){
+			setCurrentAlbum(albumPicasso);
+		}else if(count == 2){
+			setCurrentAlbum(albumMarconi);
+		}else if(count == 3){
+			setCurrentAlbum(albumCash);
+		}else{
+			setCurrentAlbum(albumPicasso);
+			count = 1;
+		}
+}, false);
+}
+	 
+	 
+ };
