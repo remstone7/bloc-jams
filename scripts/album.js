@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // create the album information
 var createSongRow = function(songNumber, songName, songLength){
 	var template = 
@@ -310,7 +310,7 @@ $(document).ready(function(){
    $previousButton.click(previousSong);
    $nextButton.click(nextSong);
 });
-=======
+
 // create the album information
 var createSongRow = function(songNumber, songName, songLength){
 	var template = 
@@ -547,4 +547,3 @@ $(document).ready(function(){
 
 
 
->>>>>>> ch-19-fix
