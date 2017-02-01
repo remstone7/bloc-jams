@@ -92,17 +92,25 @@ var setCurrentAlbum = function(album){
 	}
 };
 
+
+
 var updateSeekBarWhileSongPlays = function() {
      if (currentSoundFile) {
          // #10
          currentSoundFile.bind('timeupdate', function(event) {
              // #11
-             var seekBarFillRatio = this.getTime() / this.getDuration();
+             var currentTime = this.getTime();
+             
+             var songLength = this.getDuration();
+             var seekBarFillRatio = currentTime / songLength;
+             
              var $seekBar = $('.seek-control .seek-bar');
- 
+             
+             
+             
              updateSeekPercentage($seekBar, seekBarFillRatio);
              
-             setCurrentTimeInPLayerBar(filterTimeCode(this.getTime()));
+             setCurrentTimeInPlayerBar(filterTimeCode(currentTime));
          });
      }
  };
@@ -160,9 +168,9 @@ var updatePlayerBarSong = function(){
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
-
+   
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.duration));
+     setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.duration));
 };
 
 
@@ -291,38 +299,32 @@ var togglePlayFromPlayerbar = function() {
     }
 };
 
-
 // 21
 
-var setCurrentTimeInPLayerBar = function(currentTime){
-    var currentTimeElement = $('.seek-control .current-time');
-    return currentTimeElement.text(currentTime);
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    $('.seek-control .current-time').html(currentTime);
 };
-var setTotalTimeInPlayerBar = function(totalTime){
-     var totalTimeElement = $('.seek-control .total-time');
-    return totalTimeElement.text(totalTime);
+var setTotalTimeInPlayerBar = function(totalTime) {
+    $('.seek-control .total-time').html(totalTime);
 };
 
-var filterTimeCode = function(timeInSeconds){
+var filterTimeCode = function(timeInSeconds) {
+    
     var seconds = parseFloat(timeInSeconds);
     
+    var wholeSeconds = Math.floor(seconds);
+    var minutes = Math.floor(wholeSeconds / 60);
     
-    var totalSeconds = Math.floor(seconds);
-    var totalMin = Math.floor(totalSeconds / 60);
+    var secondsLeft = wholeSeconds % 60;
     
-    var seconMin = totalSeconds % 60;
-    
-    if (seconMin < 10){
-        seconMin = "0" + seconMin;
+    if (secondsLeft < 10) {
+        secondsLeft = '0' + secondsLeft;   
     }
     
-    return totalMin + ':' + seconMin;
+    return minutes + ':'+ secondsLeft;
 };
 
 //end of 21
-
-
-
 
 
 
@@ -346,7 +348,6 @@ var playPauseButton = $('.main-controls .play-pause');
 $(document).ready(function(){
     setCurrentAlbum(albumPicasso);
     setupSeekBars();
-    
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
     playPauseButton.click(togglePlayFromPlayerbar);
