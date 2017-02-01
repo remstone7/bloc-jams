@@ -209,6 +209,7 @@ var nextSong = function(){
     
     $nextSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
+    updatePlayerBarSong();
 
 };
 var previousSong = function() {
@@ -245,6 +246,7 @@ var previousSong = function() {
     $previousSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
     
+    updatePlayerBarSong();
 };
 
 
